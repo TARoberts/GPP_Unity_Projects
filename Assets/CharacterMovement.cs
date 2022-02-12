@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
     public float turnSmooth = .1f;
     private float turnSmoothness;
 
-    public Transform camera;
+    public Transform gameCam;
 
     // Update is called once per frame
     void Update()
@@ -21,10 +21,9 @@ public class CharacterMovement : MonoBehaviour
         
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + gameCam.eulerAngles.y;
 
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothness, turnSmooth);
-            
 
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
