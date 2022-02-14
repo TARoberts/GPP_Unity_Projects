@@ -33,7 +33,7 @@ public class ThirdPersonMovement : MonoBehaviour
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if (!isGrounded && velocity.y < 0)
+        if (!isGrounded && (velocity.y < 0))
         {
             velocity.y = -2f;
 
@@ -58,7 +58,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping")))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             isJumping = true;
@@ -78,6 +78,19 @@ public class ThirdPersonMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
   
         //attack
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        {
+            if (Input.GetButtonDown("Attack"))
+            {
+                animator.SetBool("Attack", true);
+            }
+            else
+            {
+                animator.SetBool("Attack", false);
+            }
+        }
+ 
 
         //move
         float horizontal = Input.GetAxisRaw("Horizontal");
