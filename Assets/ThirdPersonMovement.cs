@@ -15,9 +15,13 @@ public class ThirdPersonMovement : MonoBehaviour
     public float speed = 6;
     public float gravity = -9.81f;
     public float jumpHeight = 3;
+    public float dashSpeed;
+    public float dashTime;
+
     Vector3 velocity;
     bool isGrounded;
     bool isJumping;
+    Vector3 direction;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -26,6 +30,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     public Animator animator;
+    public Rigidbody rb;
 
     // Update is called once per frame
     void Update()
@@ -90,17 +95,19 @@ public class ThirdPersonMovement : MonoBehaviour
                 animator.SetBool("Attack", false);
             }
         }
+
  
 
         //move
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical);
+        direction = new Vector3(horizontal, 0f, vertical);
         float magnitude = direction.magnitude;
         direction.Normalize();
 
         if (direction.magnitude >= 0.1f)
         {
+            animator.SetFloat("Animation Speed", 1);
             animator.SetFloat("moveSpeed", magnitude);
             animator.SetBool("Moving", true);
             
@@ -113,6 +120,27 @@ public class ThirdPersonMovement : MonoBehaviour
         else
         {
             animator.SetBool("Moving", false);
+            animator.SetFloat("Animation Speed", 1);
+        }
+
+        //dash
+
+        if (Input.GetButtonDown("Dash") && isGrounded)
+        {
+            StartCoroutine(Dash());
+
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dashTime)
+        {
+            animator.SetFloat("Animation Speed", 2);
+            controller.Move(direction * dashSpeed * Time.deltaTime);
+            yield return null;
         }
     }
 }
