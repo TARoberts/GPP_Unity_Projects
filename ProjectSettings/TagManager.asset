@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shadow
   - Collide
+  - SpeedBoost
   layers:
   - Default
   - TransparentFX
