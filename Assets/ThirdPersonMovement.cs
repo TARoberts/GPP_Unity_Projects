@@ -17,6 +17,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public float jumpHeight = 3;
     public float dashSpeed;
     public float dashTime;
+    public bool doubleJump;
 
     Vector3 velocity;
     bool isGrounded;
@@ -63,7 +64,7 @@ public class ThirdPersonMovement : MonoBehaviour
             
         }
 
-        if (Input.GetButtonDown("Jump") && isGrounded && (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping")))
+        if (Input.GetButtonDown("Jump") && (isGrounded))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
             isJumping = true;
@@ -72,11 +73,24 @@ public class ThirdPersonMovement : MonoBehaviour
             animator.SetBool("IsFalling", false);
             animator.SetBool("IsGrounded", false);
         }
+
+        else if(Input.GetButtonDown("Jump") && doubleJump)
+        {
+            doubleJump = false;
+            velocity.y = Mathf.Sqrt(jumpHeight * 4 * -2 * gravity);
+            isJumping = true;
+            animator.SetBool("IsJumping", true);
+            isGrounded = false;
+            animator.SetBool("IsFalling", false);
+        }
+        
         else
         {
             isJumping = false;
             animator.SetBool("IsJumping", false);
         }
+
+
 
         //gravity
         velocity.y += gravity * Time.deltaTime;

@@ -16,6 +16,10 @@ public class PickUp : MonoBehaviour
             particle.Play();
             StartCoroutine(Boost());
         }
+        else if (other.tag == "Player" && tag == "JumpBoost")
+        {
+            StartCoroutine(Jumps());
+        }
     }
 
     IEnumerator Boost()
@@ -23,10 +27,24 @@ public class PickUp : MonoBehaviour
         ThirdPersonMovement movement = player.GetComponent<ThirdPersonMovement>();
         movement.speed = 10;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
         yield return new WaitForSeconds(5f);
         movement.speed = 6;
         gameObject.SetActive(false);
-        yield return null;
+
+    }
+
+    IEnumerator Jumps()
+    {
+        ThirdPersonMovement movement = player.GetComponent<ThirdPersonMovement>();
+        movement.doubleJump = true;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+        ParticleSystem particle = GetComponentInChildren<ParticleSystem>();
+        particle.Play();
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+
     }
 
 }
