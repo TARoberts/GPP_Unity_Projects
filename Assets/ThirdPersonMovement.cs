@@ -55,7 +55,7 @@ public class ThirdPersonMovement : MonoBehaviour
             isJumping = false;
         }
 
-        else if (isJumping)
+        else
         {
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsFalling", true);
