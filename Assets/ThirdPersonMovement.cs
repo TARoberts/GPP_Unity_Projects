@@ -11,6 +11,7 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
+    public GameObject CSCam1, CSCam2;
 
     public float speed = 6;
     public float gravity = -9.81f;
@@ -32,10 +33,32 @@ public class ThirdPersonMovement : MonoBehaviour
 
     public Animator animator;
     public Rigidbody rb;
+    public GameObject weapons;
+    public GameObject place;
+
+    public bool inCS = false;
 
     // Update is called once per frame
     void Update()
     {  
+
+        if (inCS)
+        {
+            speed = 0;
+            weapons.SetActive(false);
+            controller.transform.position = place.transform.position;
+            controller.transform.rotation = place.transform.rotation;
+            rb.freezeRotation = true;
+
+        }
+
+        else
+        {
+            speed = 6;
+            rb.freezeRotation = false;
+            weapons.SetActive(true);
+            CSCam1.SetActive(false);
+        }
         //jump
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -157,5 +180,10 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(direction * dashSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(5f);
     }
 }
