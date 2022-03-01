@@ -157,7 +157,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 animator.SetFloat("moveSpeed", magnitude);
                 animator.SetBool("Moving", true);
 
-                //direction = Quaternion.AngleAxis(cam.rotation.eulerAngles.y, Vector3.up) * direction;
+                direction = Quaternion.AngleAxis(cam.rotation.eulerAngles.y, Vector3.up) * direction;
 
                 controller.Move(direction * speed * magnitude * Time.deltaTime);
 

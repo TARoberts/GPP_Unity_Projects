@@ -462,7 +462,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6549137, y: 1}
+    m_SensorSize: {x: 1.6565316, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -755,7 +755,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6549137, y: 1}
+    m_SensorSize: {x: 1.6565316, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1585,7 +1585,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6549137, y: 1}
+    m_SensorSize: {x: 1.6565316, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1601,7 +1601,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847077152}
-  m_LocalRotation: {x: 0.06810233, y: 0.000000017166434, z: -0.0000000011717947, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810233, y: -0.000000017166434, z: 0.0000000011717947, w: 0.99767834}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1938,7 +1938,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06810233, y: 0.000000017188157, z: -0.0000000011702319, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810233, y: -0.000000017188153, z: 0.0000000011702096, w: 0.99767834}
   m_LocalPosition: {x: 0, y: 3.366, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2050,7 +2050,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6549137, y: 1}
+    m_SensorSize: {x: 1.6565316, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2558,7 +2558,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1962408244}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1456802669
 BoxCollider:
@@ -2634,7 +2634,6 @@ GameObject:
   - component: {fileID: 1476894832}
   - component: {fileID: 1476894831}
   - component: {fileID: 1476894830}
-  - component: {fileID: 1476894829}
   m_Layer: 0
   m_Name: DoorZone1
   m_TagString: Untagged
@@ -2642,19 +2641,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1476894829
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476894828}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1476894830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3061,7 +3047,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1962408244}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1737027592
 BoxCollider:
@@ -3547,7 +3533,6 @@ GameObject:
   - component: {fileID: 1962408244}
   - component: {fileID: 1962408243}
   - component: {fileID: 1962408242}
-  - component: {fileID: 1962408241}
   m_Layer: 0
   m_Name: DoorZone2
   m_TagString: Untagged
@@ -3555,19 +3540,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1962408241
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1962408240}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1962408242
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3631,8 +3603,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 334685532}
-  - {fileID: 1456802668}
   - {fileID: 1737027591}
+  - {fileID: 1456802668}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3647,7 +3619,6 @@ GameObject:
   - component: {fileID: 1968012860}
   - component: {fileID: 1968012859}
   - component: {fileID: 1968012858}
-  - component: {fileID: 1968012857}
   m_Layer: 0
   m_Name: DoorZone3
   m_TagString: Untagged
@@ -3655,19 +3626,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1968012857
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1968012856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1968012858
 MeshRenderer:
   m_ObjectHideFlags: 0
