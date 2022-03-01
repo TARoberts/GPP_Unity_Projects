@@ -37,137 +37,157 @@ public class ThirdPersonMovement : MonoBehaviour
     public GameObject place;
 
     public bool inCS = false;
+    public bool inPos = false;
 
     // Update is called once per frame
     void Update()
-    {  
+    {
 
         if (inCS)
         {
-            speed = 0;
+            if (!inPos)
+            {
+                SetPosition();
+            }
+            
+            animator.SetBool("Moving", false);
             weapons.SetActive(false);
-            controller.transform.position = place.transform.position;
-            controller.transform.rotation = place.transform.rotation;
             rb.freezeRotation = true;
 
         }
 
         else
         {
-            speed = 6;
-            rb.freezeRotation = false;
-            weapons.SetActive(true);
-            CSCam1.SetActive(false);
-        }
-        //jump
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-
-        if (!isGrounded && (velocity.y < 0))
-        {
-            velocity.y = -2f;
-
-            animator.SetBool("IsJumping", false);
-            animator.SetBool("IsFalling", true);
-            isJumping = false;
-        }
-
-        if (isGrounded)
-        {
-            animator.SetBool("IsJumping", false);
-            animator.SetBool("IsFalling", false);
-            animator.SetBool("IsGrounded", true);
-            isJumping = false;
-        }
-
-        else
-        {
-            animator.SetBool("IsJumping", false);
-            animator.SetBool("IsFalling", true);
-            animator.SetBool("IsGrounded", false);
             
-        }
-
-        if (Input.GetButtonDown("Jump") && (isGrounded))
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-            isGrounded = false;
-            animator.SetBool("IsFalling", false);
-            animator.SetBool("IsGrounded", false);
-        }
-
-        else if(Input.GetButtonDown("Jump") && doubleJump)
-        {
-            doubleJump = false;
-            velocity.y = Mathf.Sqrt(jumpHeight * 4 * -2 * gravity);
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-            isGrounded = false;
-            animator.SetBool("IsFalling", false);
-        }
-        
-        else
-        {
-            isJumping = false;
-            animator.SetBool("IsJumping", false);
-        }
-
-
-
-        //gravity
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-  
-        //attack
-
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
-        {
-            if (Input.GetButtonDown("Attack"))
+            rb.freezeRotation = false;
+            if (!weapons.active)
             {
-                animator.SetBool("Attack", true);
+                StartCoroutine(Delay());
+                weapons.SetActive(true);
+            }
+            
+            CSCam1.SetActive(false);
+
+            //jump
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+            if (!isGrounded && (velocity.y < 0))
+            {
+                velocity.y = -2f;
+
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsFalling", true);
+
+            }
+
+            if (isGrounded)
+            {
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsFalling", false);
+                animator.SetBool("IsGrounded", true);
+
+            }
+
+            else
+            {
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsFalling", true);
+                animator.SetBool("IsGrounded", false);
+
+            }
+
+            if (Input.GetButtonDown("Jump") && (isGrounded))
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+
+                animator.SetBool("IsJumping", true);
+                isGrounded = false;
+                animator.SetBool("IsFalling", false);
+                animator.SetBool("IsGrounded", false);
+            }
+
+            else if (Input.GetButtonDown("Jump") && doubleJump)
+            {
+                doubleJump = false;
+                velocity.y = Mathf.Sqrt(jumpHeight * 4 * -2 * gravity);
+
+                animator.SetBool("IsJumping", true);
+                isGrounded = false;
+                animator.SetBool("IsFalling", false);
+            }
+
+            else
+            {
+
+                animator.SetBool("IsJumping", false);
+            }
+
+
+
+            //gravity
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+
+            //attack
+
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+            {
+                if (Input.GetButtonDown("Attack"))
+                {
+                    animator.SetBool("Attack", true);
+                }
+                else
+                {
+                    animator.SetBool("Attack", false);
+                }
+            }
+
+
+
+            //move
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            direction = new Vector3(horizontal, 0f, vertical);
+            float magnitude = direction.magnitude;
+            direction.Normalize();
+
+            if (direction.magnitude >= 0.1f)
+            {
+                animator.SetFloat("Animation Speed", 1);
+                animator.SetFloat("moveSpeed", magnitude);
+                animator.SetBool("Moving", true);
+
+                //direction = Quaternion.AngleAxis(cam.rotation.eulerAngles.y, Vector3.up) * direction;
+
+                controller.Move(direction * speed * magnitude * Time.deltaTime);
+
+                Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
+                controller.transform.rotation = Quaternion.RotateTowards(controller.transform.rotation, toRotation, turnSmoothTime * Time.deltaTime);
             }
             else
             {
-                animator.SetBool("Attack", false);
+                animator.SetBool("Moving", false);
+                animator.SetFloat("Animation Speed", 1);
+            }
+
+            //dash
+
+            if (Input.GetButtonDown("Dash") && isGrounded)
+            {
+                StartCoroutine(Dash());
+
             }
         }
+    }
 
- 
+    void SetPosition()
+    {
+        controller.enabled = false;
+        controller.transform.position = place.transform.position;
+        controller.transform.rotation = place.transform.rotation;
+        controller.enabled = true;
+        inPos = true;
 
-        //move
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        direction = new Vector3(horizontal, 0f, vertical);
-        float magnitude = direction.magnitude;
-        direction.Normalize();
-
-        if (direction.magnitude >= 0.1f)
-        {
-            animator.SetFloat("Animation Speed", 1);
-            animator.SetFloat("moveSpeed", magnitude);
-            animator.SetBool("Moving", true);
-            
-            //direction = Quaternion.AngleAxis(cam.rotation.eulerAngles.y, Vector3.up) * direction;
-            
-            controller.Move(direction * speed* magnitude * Time.deltaTime);
-            
-            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up); 
-            controller.transform.rotation = Quaternion.RotateTowards(controller.transform.rotation, toRotation, turnSmoothTime * Time.deltaTime);
-        }
-        else
-        {
-            animator.SetBool("Moving", false);
-            animator.SetFloat("Animation Speed", 1);
-        }
-
-        //dash
-
-        if (Input.GetButtonDown("Dash") && isGrounded)
-        {
-            StartCoroutine(Dash());
-
-        }
     }
 
     IEnumerator Dash()
@@ -184,6 +204,6 @@ public class ThirdPersonMovement : MonoBehaviour
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
     }
 }

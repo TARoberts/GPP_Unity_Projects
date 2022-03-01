@@ -10,24 +10,42 @@ public class PushButton : MonoBehaviour
     public GameObject player;
 
     private bool doorOpen = false;
+    private bool inZone = false;
 
-    private void Start()
-    {
-        //ButtonPush push = player.GetComponent<ButtonPush>();
+    void OnTriggerEnter(Collider other)
+    {       
+        if (other.tag == "Player")
+        {
+            inZone = true;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerExit(Collider other)
     {
-    if (other.tag == "Player")
+        if (other.tag == "Player")
         {
-           CSFunction();
+            inZone = false;
         }
+    }
+    void Update()
+    {
+        ThirdPersonMovement movement = player.GetComponent<ThirdPersonMovement>();
+
+        if (Input.GetButtonDown("Interact") && inZone && (movement.controller.velocity.magnitude == 0))
+        {
+            if (!movement.inCS)
+            {
+
+                CSFunction();
+            }
+        }
+
     }
 
     void CSFunction()
     {
         ThirdPersonMovement movement = player.GetComponent<ThirdPersonMovement>();
-        movement.speed = 0;
+        
         movement.inCS = true;
         StartCoroutine(Delay());
 
@@ -43,7 +61,7 @@ public class PushButton : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         animatorButton.Play("ButtonPush", 0, 0.0f);
 
-        movement.inCS = false;
+        
 
         if (!doorOpen)
         {
@@ -57,6 +75,9 @@ public class PushButton : MonoBehaviour
 
         movement.CSCam1.gameObject.SetActive(false);
         movement.CSCam2.gameObject.SetActive(false);
+        movement.inCS = false;
+        movement.inPos = false;
+        
 
         yield return null;
         
