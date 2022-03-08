@@ -6,30 +6,50 @@ public class LockOn : MonoBehaviour
 {
     public Transform playerTransform;
 
-    Cinemachine.CinemachineVirtualCamera c_VirtualCamera;
+    [SerializeField] Cinemachine.CinemachineFreeLook c_VirtualCamera;
+    
+    Transform targetTransform;
+    [SerializeField] GameObject lockedoneffect;
 
-    private void Start()
-    {
-        c_VirtualCamera = this.GetComponent<Cinemachine.CinemachineVirtualCamera>();
-    }
+    bool lockedon = false;
 
-    // Update is called once per frame
+
     void Update()
     {
         RaycastHit target;
-
         if (Input.GetButtonDown("LockOn"))
         {
-            if (Physics.Raycast(transform.position, transform.forward, out target, Mathf.Infinity))
+            if (!lockedon)
             {
-                c_VirtualCamera.LookAt = target.transform;
-                Debug.Log("hit");
+                if (Physics.Raycast(transform.position, transform.forward, out target, Mathf.Infinity))
+                {
+                    if (target.transform.tag == "Enemy")
+                    {
+                        targetTransform = target.transform;
+                        c_VirtualCamera.m_LookAt = targetTransform;
+                        GameObject targetting = Instantiate(lockedoneffect, targetTransform);
+                        targetting.transform.position = targetTransform.position;
+                        lockedon = true;
+
+                        Debug.Log("hit");
+                    }
+                    
+
+                }
             }
+            else if (lockedon)
+            {
+                c_VirtualCamera.LookAt = playerTransform;
+                
+                lockedon = false;
+            }
+
         }
 
-        if (Input.GetButtonUp("LockOn"))
+        else if (Input.GetButtonUp("LockOn"))
         {
-           // c_VirtualCamera.LookAt = playerTransform;
+            
+            
         }
 
     }

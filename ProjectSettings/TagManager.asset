@@ -8,6 +8,7 @@ TagManager:
   - Collide
   - SpeedBoost
   - JumpBoost
+  - Enemy
   layers:
   - Default
   - TransparentFX
