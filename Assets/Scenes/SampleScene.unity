@@ -474,7 +474,7 @@ MonoBehaviour:
   m_YAxis:
     Value: 0.5
     m_SpeedMode: 0
-    m_MaxSpeed: 10
+    m_MaxSpeed: 8
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Right Stick Y
@@ -1617,7 +1617,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847077152}
-  m_LocalRotation: {x: 0.06810234, y: 0.00000001716644, z: -0.0000000011717952, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810234, y: -0.00000001716643, z: 0.0000000011717944, w: 0.99767834}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1953,7 +1953,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06810233, y: 0.000000017166453, z: -0.0000000011716906, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810233, y: -0.000000017166444, z: 0.0000000011717127, w: 0.99767834}
   m_LocalPosition: {x: 0, y: 3.366, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2064,7 +2064,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015603491}
-  m_LocalRotation: {x: 0.086238325, y: 0.0000000042855697, z: -3.7096232e-10, w: 0.99627453}
+  m_LocalRotation: {x: 0.08623833, y: -0.0000000042855706, z: 3.7096243e-10, w: 0.99627453}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2258,8 +2258,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206859079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43, y: 2.035584, z: 2.86}
-  m_LocalScale: {x: 4.3209, y: 2.122, z: 1}
+  m_LocalPosition: {x: -0.43, y: 1.92, z: 2.86}
+  m_LocalScale: {x: 3, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3715,7 +3715,7 @@ MonoBehaviour:
   cam: {fileID: 963194228}
   CSCam1: {fileID: 1246585861}
   CSCam2: {fileID: 2010124420}
-  speed: 6
+  speed: 4
   gravity: -9.81
   jumpHeight: 5
   dashSpeed: 20
@@ -9136,7 +9136,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101627032}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -9756,7 +9756,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 2
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -9901,7 +9901,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 3
+      mode: 0
       spread: 0
       speed:
         serializedVersion: 2

@@ -10,6 +10,7 @@ public class LockOn : MonoBehaviour
     
     Transform targetTransform;
     [SerializeField] GameObject lockedoneffect;
+    GameObject lockedTarget;
 
     bool lockedon = false;
 
@@ -27,10 +28,10 @@ public class LockOn : MonoBehaviour
                     {
                         targetTransform = target.transform;
                         c_VirtualCamera.m_LookAt = targetTransform;
-                        GameObject targetting = Instantiate(lockedoneffect, targetTransform);
-                        targetting.transform.position = targetTransform.position;
+                        GameObject temp = Instantiate(lockedoneffect, targetTransform);
+                        lockedTarget = temp;
+                        lockedTarget.transform.position = targetTransform.position;
                         lockedon = true;
-
                         Debug.Log("hit");
                     }
                     
@@ -40,16 +41,10 @@ public class LockOn : MonoBehaviour
             else if (lockedon)
             {
                 c_VirtualCamera.LookAt = playerTransform;
-                
+                Destroy(lockedTarget);
                 lockedon = false;
             }
 
-        }
-
-        else if (Input.GetButtonUp("LockOn"))
-        {
-            
-            
         }
 
     }
