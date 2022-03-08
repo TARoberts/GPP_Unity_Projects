@@ -10,6 +10,7 @@ public class LockOn : MonoBehaviour
     
     Transform targetTransform;
     [SerializeField] GameObject lockedoneffect;
+    [SerializeField] Cinemachine.CinemachineTargetGroup targets;
     GameObject lockedTarget;
 
     bool lockedon = false;
@@ -27,12 +28,14 @@ public class LockOn : MonoBehaviour
                     if (target.transform.tag == "Enemy")
                     {
                         targetTransform = target.transform;
-                        c_VirtualCamera.m_LookAt = targetTransform;
                         GameObject temp = Instantiate(lockedoneffect, targetTransform);
                         lockedTarget = temp;
                         lockedTarget.transform.position = targetTransform.position;
                         lockedon = true;
                         Debug.Log("hit");
+
+                        targets.AddMember(targetTransform, 1f, 5);
+                        //c_VirtualCamera.m_LookAt = targetTransform;
                     }
                     
 
@@ -40,7 +43,8 @@ public class LockOn : MonoBehaviour
             }
             else if (lockedon)
             {
-                c_VirtualCamera.LookAt = playerTransform;
+                //c_VirtualCamera.LookAt = playerTransform;
+                targets.RemoveMember(targetTransform);
                 Destroy(lockedTarget);
                 lockedon = false;
             }
