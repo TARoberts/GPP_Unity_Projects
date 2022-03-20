@@ -10,6 +10,7 @@ public class SplineMovement : MonoBehaviour
 
     public bool debugSpline = true;
     public bool activeSpline;
+    public float speed = 5;
 
     private Transform startPos;
 
@@ -20,7 +21,7 @@ public class SplineMovement : MonoBehaviour
 
     private void Start()
     {
-        startPos = transform;
+        startPos = this.transform;
         activeSpline = false;
         noSplines = transform.childCount;
         splinePoints = new Vector3[noSplines];
@@ -53,21 +54,22 @@ public class SplineMovement : MonoBehaviour
 
         if (activeSpline)
         {
-            float step = 5 * Time.deltaTime;
+            float step = speed * Time.deltaTime;
             splineCam.SetActive(true);
             mainCam.SetActive(false);
 
-            if (Input.GetAxisRaw("Horizontal") > 0.1f || Input.GetAxisRaw("Horizontal") < -0.1f)
+            if (Input.GetAxisRaw("Right Stick X") > 0.01f || Input.GetAxis("Right Stick X") < -0.01f)
             {
-                Vector3 position = new Vector3(startPos.position.x, startPos.position.y, startPos.position.z + (Input.GetAxisRaw("Vertical")* 5));
-                transform.position = position;
+                Vector3 position = new Vector3(startPos.position.x, startPos.position.y, startPos.position.z + (Input.GetAxisRaw("Right Stick X")));
+
+                Debug.Log(position);
+                this.transform.position = position;
                 
             }
 
             else
             {
-                
-                transform.position = startPos.position;
+                this.transform.position = startPos.position;
             }
 
                 
