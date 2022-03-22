@@ -10,7 +10,7 @@ public class PlatformMovement : MonoBehaviour
     public float amplitude = 0.5f;
     public float frequency = 1f;
     public float speed = 5f;
-    public Transform start, end;
+    public Transform start, end, ground;
 
     public bool rotateX, rotateY, rotateZ;
 
@@ -30,8 +30,9 @@ public class PlatformMovement : MonoBehaviour
         
 
         //unlocks the start and end point from the parent
-        end.parent = null;
-        start.parent = null;
+        end.parent = transform.parent;
+        start.parent = transform.parent;
+        ground.parent = transform.parent;
     }
      
     // Update is called once per frame
