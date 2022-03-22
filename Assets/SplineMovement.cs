@@ -11,6 +11,7 @@ public class SplineMovement : MonoBehaviour
     public bool debugSpline = true;
     public bool activeSpline;
     public float speed = 5;
+    private Vector3 direction;
 
     private Transform startPos;
 
@@ -58,11 +59,13 @@ public class SplineMovement : MonoBehaviour
             splineCam.SetActive(true);
             mainCam.SetActive(false);
 
-            if (Input.GetAxisRaw("Right Stick X") > 0.01f || Input.GetAxis("Right Stick X") < -0.01f)
+/*            if (Input.GetAxisRaw("Right Stick X") > 0.01f || Input.GetAxis("Right Stick X") < -0.01f)
             {
+
                 Vector3 position = new Vector3(startPos.position.x, startPos.position.y, startPos.position.z + (Input.GetAxisRaw("Right Stick X")));
 
                 Debug.Log(position);
+                Debug.Log(Input.GetAxisRaw("Right Stick X"));
                 this.transform.position = position;
                 
             }
@@ -70,10 +73,21 @@ public class SplineMovement : MonoBehaviour
             else
             {
                 this.transform.position = startPos.position;
+            }*/
+
+
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            direction = new Vector3(horizontal, 0f, vertical);
+            float magnitude = direction.magnitude;
+            direction.Normalize();
+
+            if (direction.magnitude >= 0.1f)
+            {
+                platform.position = Vector3.MoveTowards(platform.position, splinePoints[currentSpline], step);
             }
 
-                
-            platform.position = Vector3.MoveTowards(platform.position, splinePoints[currentSpline], step);
+                /*platform.position = Vector3.MoveTowards(platform.position, splinePoints[currentSpline], step);*/
 
             if (Vector3.Distance(platform.position, splinePoints[currentSpline]) < 0.1f)
             {
