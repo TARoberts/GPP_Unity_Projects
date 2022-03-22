@@ -18,7 +18,7 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] private Transform platform;
     [SerializeField] CharacterController player;
     [SerializeField] public ThirdPersonMovement moveScript;
-    [SerializeField] GameObject splineCam, mainCam;
+    [SerializeField] GameObject splineCam_1, splineCam_2, mainCam;
 
     private void Start()
     {
@@ -41,6 +41,8 @@ public class SplineMovement : MonoBehaviour
             splinePoints[i] = transform.GetChild(i).position;
         }
 
+        camController();
+
         if (noSplines > 1 && debugSpline)
         {
             for (int i = 0; i < noSplines; i++)
@@ -55,9 +57,10 @@ public class SplineMovement : MonoBehaviour
 
         if (activeSpline)
         {
+            
             float step = speed * Time.deltaTime;
-            splineCam.SetActive(true);
-            mainCam.SetActive(false);
+/*            splineCam_1.SetActive(true);
+            mainCam.SetActive(false);*/
 
 /*            if (Input.GetAxisRaw("Right Stick X") > 0.01f || Input.GetAxis("Right Stick X") < -0.01f)
             {
@@ -103,12 +106,37 @@ public class SplineMovement : MonoBehaviour
                 moveScript.active = true;
                 activeSpline = false;
                 player.enabled = true;
-                mainCam.SetActive(true);
-                splineCam.SetActive(false);
+/*                mainCam.SetActive(true);
+                splineCam_1.SetActive(false);*/
             }
         }
 
 
 
+    }
+
+    void camController()
+    {
+        if (activeSpline)
+        {
+            if (currentSpline == 2 || currentSpline == 3)
+            {
+                mainCam.SetActive(false);
+                splineCam_1.SetActive(false);
+                splineCam_2.SetActive(true);
+            }
+            else
+            {
+                mainCam.SetActive(false);
+                splineCam_1.SetActive(true);
+                splineCam_2.SetActive(false);
+            }
+        }
+        else
+        {
+            mainCam.SetActive(true);
+            splineCam_1.SetActive(false);
+            splineCam_2.SetActive(false);
+        }
     }
 }
