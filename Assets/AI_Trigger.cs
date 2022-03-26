@@ -20,7 +20,7 @@ public class AI_Trigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            aiscript.distance = 10;
+            aiscript.distance = 20000;
         }
         
     }

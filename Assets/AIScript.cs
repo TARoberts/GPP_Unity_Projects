@@ -9,32 +9,34 @@ public class AIScript : MonoBehaviour
     public float distance;
     private GameObject player;
 
+    public float speed = 3;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+        distance = 2000;
     }
     // Update is called once per frame
     void Update()
     {
-        if (distance > 5.0f)
+        if (distance > 18.0f)
         {
             AIState = state.idle;
         }
 
-        else if (distance > 2.50f && distance <= 5.0f)
+        else if (distance > 10f && distance <= 18.0f)
         {
             AIState = state.look;
         }
 
-        else if (distance <= 2.5f)
+        else if (distance <= 10f)
         {
             AIState = state.attack;
         }
 
         if (AIState == state.idle)
         {
-            //do nothing
+            Debug.Log(distance);
         }
 
         else if (AIState == state.look)
@@ -49,6 +51,7 @@ public class AIScript : MonoBehaviour
 
         else if (AIState == state.attack)
         {
+            float step = speed * Time.deltaTime;
             Vector3 relativePos = player.transform.position - transform.position;
 
             relativePos.y = 0;
@@ -56,7 +59,11 @@ public class AIScript : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
 
+            Vector3 newPos = Vector3.MoveTowards(transform.position, player.transform.position, step);
 
+            newPos.y = transform.position.y;
+
+            transform.position = newPos;
         }
 
 
