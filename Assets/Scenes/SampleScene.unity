@@ -563,7 +563,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.011829, y: 1}
+    m_SensorSize: {x: 2.0433435, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -872,7 +872,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.011829, y: 1}
+    m_SensorSize: {x: 2.0433435, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -888,7 +888,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126118374}
-  m_LocalRotation: {x: 0.049991805, y: 0.0000000021481081, z: -1.0752225e-10, w: 0.9987497}
+  m_LocalRotation: {x: 0.049991805, y: 0.0000000021481086, z: -1.0752227e-10, w: 0.9987497}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2104,7 +2104,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.011829, y: 1}
+    m_SensorSize: {x: 2.0433435, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2551,7 +2551,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06810234, y: -0.00000001719497, z: 0.0000000011697436, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810234, y: -0.00000001719497, z: 0.0000000011697434, w: 0.99767834}
   m_LocalPosition: {x: 23.681717, y: 3.366, z: -20.702274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2746,7 +2746,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.011829, y: 1}
+    m_SensorSize: {x: 2.0433435, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2762,7 +2762,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015603491}
-  m_LocalRotation: {x: 0.08623833, y: -0.0000000024112305, z: 2.0871806e-10, w: 0.99627453}
+  m_LocalRotation: {x: 0.08623833, y: -0.0000000024112288, z: 2.0871795e-10, w: 0.99627453}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2785,7 +2785,7 @@ GameObject:
   - component: {fileID: 1182955795}
   - component: {fileID: 1182955794}
   m_Layer: 9
-  m_Name: Cylinder
+  m_Name: Spline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2808,6 +2808,7 @@ MonoBehaviour:
   speed: 5
   platform: {fileID: 964177862}
   player: {fileID: 1891272826}
+  playerAnimator: {fileID: 1891272830}
   moveScript: {fileID: 1891272829}
   splineCam_1: {fileID: 1980410334}
   splineCam_2: {fileID: 1604436391}
@@ -3533,6 +3534,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3b20c9f8061f25646892a7a25d68c50c, type: 2}
+    - target: {fileID: 9500000, guid: e3942fec22e99384e9cee5aef64adec1, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3942fec22e99384e9cee5aef64adec1, type: 3}
 --- !u!1 &1411249376

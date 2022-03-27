@@ -17,6 +17,7 @@ public class SplineMovement : MonoBehaviour
 
     [SerializeField] private Transform platform;
     [SerializeField] CharacterController player;
+    [SerializeField] Animator playerAnimator;
     [SerializeField] public ThirdPersonMovement moveScript;
     [SerializeField] GameObject splineCam_1, splineCam_2, mainCam;
 
@@ -59,35 +60,21 @@ public class SplineMovement : MonoBehaviour
         {
             
             float step = speed * Time.deltaTime;
-/*            splineCam_1.SetActive(true);
-            mainCam.SetActive(false);*/
-
-/*            if (Input.GetAxisRaw("Right Stick X") > 0.01f || Input.GetAxis("Right Stick X") < -0.01f)
-            {
-
-                Vector3 position = new Vector3(startPos.position.x, startPos.position.y, startPos.position.z + (Input.GetAxisRaw("Right Stick X")));
-
-                Debug.Log(position);
-                Debug.Log(Input.GetAxisRaw("Right Stick X"));
-                this.transform.position = position;
-                
-            }
-
-            else
-            {
-                this.transform.position = startPos.position;
-            }*/
-
-
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             direction = new Vector3(horizontal, 0f, vertical);
             float magnitude = direction.magnitude;
             direction.Normalize();
 
+
             if (direction.magnitude >= 0.1f)
             {
                 platform.position = Vector3.MoveTowards(platform.position, splinePoints[currentSpline], step);
+                playerAnimator.SetBool("Moving", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("Moving", false);
             }
 
                 /*platform.position = Vector3.MoveTowards(platform.position, splinePoints[currentSpline], step);*/
