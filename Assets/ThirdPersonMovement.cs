@@ -40,6 +40,7 @@ public class ThirdPersonMovement : MonoBehaviour
     public bool inCS = false;
     public bool inPos = false;
 
+
     private void Start()
     {
         active = true;
@@ -147,8 +148,6 @@ public class ThirdPersonMovement : MonoBehaviour
                         animator.SetBool("Attack", false);
                     }
                 }
-
-
 
                 //move
                 float horizontal = Input.GetAxisRaw("Horizontal");

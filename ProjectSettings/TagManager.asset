@@ -9,6 +9,7 @@ TagManager:
   - SpeedBoost
   - JumpBoost
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

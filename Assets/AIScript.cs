@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AIScript : MonoBehaviour
 {
-    public enum state { idle, look, attack};
+    public enum state { idle, look, chase, attack};
     public state AIState = state.idle;
     public float distance;
     private GameObject player;
+    [SerializeField] player_combat combat;
 
     public float speed = 3;
+    private bool canAttack = true;
 
     private void Start()
     {
@@ -24,19 +26,24 @@ public class AIScript : MonoBehaviour
             AIState = state.idle;
         }
 
-        else if (distance > 10f && distance <= 18.0f)
+        else if (distance > 15f && distance <= 18.0f)
         {
             AIState = state.look;
         }
 
-        else if (distance <= 10f)
+        else if (distance > 3.0f && distance <= 15f)
+        {
+            AIState = state.chase;
+        }
+
+        else if (distance <= 3.0f)
         {
             AIState = state.attack;
         }
 
         if (AIState == state.idle)
         {
-            Debug.Log(distance);
+            
         }
 
         else if (AIState == state.look)
@@ -49,7 +56,7 @@ public class AIScript : MonoBehaviour
             transform.rotation = rotation;
         }
 
-        else if (AIState == state.attack)
+        else if (AIState == state.chase)
         {
             float step = speed * Time.deltaTime;
             Vector3 relativePos = player.transform.position - transform.position;
@@ -66,7 +73,27 @@ public class AIScript : MonoBehaviour
             transform.position = newPos;
         }
 
+        else if (AIState == state.attack)
+        {
+            if (canAttack)
+            {
+                canAttack = false;
+                StartCoroutine(attack());
+            }
+            
+        }
 
 
+
+    }
+
+    IEnumerator attack()
+    {
+        if (combat.iFrame == false)
+        {
+            combat.HP = combat.HP - 1;
+        }
+        yield return new WaitForSeconds(3.0f);
+        canAttack = true;
     }
 }
