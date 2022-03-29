@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AI_Combat : MonoBehaviour
 {
-    public int hp = 5;
+    public int hp = 3;
     private bool hitStun = false;
-    [SerializeField] Animator playerAnimator;
+    [SerializeField] Animator playerAnimator, myAnimator;
     private GameObject player;
     [SerializeField] ParticleSystem particle;
+    [SerializeField] Rigidbody body;
 
 
     private void Start()
@@ -20,7 +21,7 @@ public class AI_Combat : MonoBehaviour
         if (hp <= 0)
         {
             Debug.Log("ded");
-            hp = 5;
+            Destroy(this);
         }
         if (!hitStun)
         {
@@ -31,7 +32,7 @@ public class AI_Combat : MonoBehaviour
     IEnumerator attack()
     {
         hp--;
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(1.0f);
         hitStun = false;
     }
 
@@ -40,7 +41,7 @@ public class AI_Combat : MonoBehaviour
     {
         Vector3 forward = player.transform.TransformDirection(Vector3.forward);
         Vector3 toOther = player.transform.position - transform.position;
-        if (Vector3.Dot(forward, toOther) > 0.7)
+        if (Vector3.Dot(forward, toOther) < -0.5f)
         {
             float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < 3.0f)
@@ -49,6 +50,8 @@ public class AI_Combat : MonoBehaviour
                 {
                     
                     particle.Play();
+                    toOther.y = 0;
+                    body.AddForce(toOther.normalized * -10.0f, ForceMode.Impulse);
                     hitStun = true;
                     StartCoroutine(attack());
                 }
