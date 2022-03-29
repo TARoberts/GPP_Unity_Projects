@@ -4,24 +4,41 @@ using UnityEngine;
 
 public class AI_Combat : MonoBehaviour
 {
+    
+    public int startingHP;
     public int hp = 3;
     private bool hitStun = false;
     [SerializeField] Animator playerAnimator, myAnimator;
-    private GameObject player;
+    private GameObject player, me;
     [SerializeField] ParticleSystem particle;
     [SerializeField] Rigidbody body;
 
 
     private void Start()
     {
+        hp = startingHP;
+        me = transform.parent.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+        if (hp == 2)
+        {
+            me.transform.localScale = new Vector3 (2f, 2f, 2f);
+        }
     }
     private void Update()
     {
         if (hp <= 0)
         {
             Debug.Log("ded");
-            Destroy(this);
+
+            if (startingHP > 1)
+            {
+                hp = startingHP - 1;
+                Instantiate(me, new Vector3(transform.position.x + 5, transform.position.y - 2, transform.position.z), Quaternion.identity);
+
+                Instantiate(me, new Vector3(transform.position.x - 5, transform.position.y - 2, transform.position.z), Quaternion.identity);
+            }
+
+            Destroy(me);
         }
         if (!hitStun)
         {

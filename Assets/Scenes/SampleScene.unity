@@ -1438,9 +1438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e29e9abba4225b48990c3bb5dd4af18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 5
+  startingHP: 3
+  hp: 3
   playerAnimator: {fileID: 1891272830}
+  myAnimator: {fileID: 2085771391}
   particle: {fileID: 1352418907}
+  body: {fileID: 2085771392}
 --- !u!65 &571260797
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2233,7 +2236,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847077152}
-  m_LocalRotation: {x: 0.068102345, y: -0.00000001716643, z: 0.0000000011717947, w: 0.99767834}
+  m_LocalRotation: {x: 0.068102345, y: 0.00000001716644, z: -0.0000000011717953, w: 0.99767834}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2569,7 +2572,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06810234, y: -0.00000001719497, z: 0.0000000011697434, w: 0.99767834}
+  m_LocalRotation: {x: 0.06810234, y: 0.000000017194983, z: -0.0000000011697671, w: 0.99767834}
   m_LocalPosition: {x: -20.5, y: 3.366, z: -20.702274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2780,7 +2783,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015603491}
-  m_LocalRotation: {x: 0.08623834, y: -0.000000002019894, z: 1.7484364e-10, w: 0.99627453}
+  m_LocalRotation: {x: 0.08623833, y: -0.000000005672849, z: 4.9104637e-10, w: 0.99627453}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15063,6 +15066,7 @@ GameObject:
   - component: {fileID: 2085771386}
   - component: {fileID: 2085771390}
   - component: {fileID: 2085771391}
+  - component: {fileID: 2085771392}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -15187,6 +15191,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &2085771392
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085771385}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2101627032
 GameObject:
   m_ObjectHideFlags: 0
