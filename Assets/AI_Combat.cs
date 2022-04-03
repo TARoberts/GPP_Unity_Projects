@@ -23,6 +23,10 @@ public class AI_Combat : MonoBehaviour
         {
             me.transform.localScale = new Vector3 (2f, 2f, 2f);
         }
+        else if (hp == 1)
+        {
+            me.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
     }
     private void Update()
     {
@@ -49,6 +53,7 @@ public class AI_Combat : MonoBehaviour
     IEnumerator attack()
     {
         hp--;
+
         yield return new WaitForSeconds(1.0f);
         hitStun = false;
     }

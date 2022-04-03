@@ -9,6 +9,7 @@ public class AIScript : MonoBehaviour
     public float distance;
     private GameObject player;
     [SerializeField] player_combat combat;
+    [SerializeField] Rigidbody body;
 
     public float speed = 3;
     private bool canAttack = true;
@@ -89,8 +90,10 @@ public class AIScript : MonoBehaviour
 
     IEnumerator attack()
     {
+        Vector3 toOther = player.transform.position - transform.position;
         if (combat.iFrame == false)
         {
+            body.AddForce(toOther.normalized * -5.0f, ForceMode.Impulse);
             combat.HP = combat.HP - 1;
         }
         yield return new WaitForSeconds(3.0f);
