@@ -6,8 +6,10 @@ public class player_combat : MonoBehaviour
 {
     public int HP;
     [SerializeField] Animator playerAnimator;
-    [SerializeField] AI_Combat aiCombat;
+    /*[SerializeField] AI_Combat aiCombat;*/
+    [SerializeField] CharacterController player;
     public bool iFrame = false;
+    [SerializeField] GameObject spawn;
 
     private Transform enemy = null;
 
@@ -24,7 +26,21 @@ public class player_combat : MonoBehaviour
         }
         if (HP <= 0)
         {
-            this.gameObject.SetActive(false);
+            playerAnimator.SetBool("Dead", true);
+            player.enabled = false;
+            
+            StartCoroutine(respawn());
         }
+    }
+
+    IEnumerator respawn()
+    {
+        yield return new WaitForSeconds(3.0f);
+        playerAnimator.SetBool("Dead", false);
+        transform.position = spawn.transform.position;
+        transform.rotation = spawn.transform.rotation;
+        HP = 5;
+        player.enabled = true;
+        yield return null;
     }
 }

@@ -10,18 +10,29 @@ public class AIScript : MonoBehaviour
     private GameObject player;
     [SerializeField] player_combat combat;
     [SerializeField] Rigidbody body;
+    
 
     public float speed = 3;
     private bool canAttack = true;
+    private bool patrolling = true;
+    public float range = 3.0f;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         distance = 2000;
+
+        Vector3 toOther = player.transform.position - transform.position;
+        body.AddForce(toOther.normalized * -2.0f, ForceMode.Impulse);
     }
     // Update is called once per frame
     void Update()
     {
+        if (combat.HP == 0)
+        {
+            distance = 2000;
+        }
+
         if (distance > 18.0f)
         {
             AIState = state.idle;
@@ -37,14 +48,18 @@ public class AIScript : MonoBehaviour
             AIState = state.chase;
         }
 
-        else if (distance <= 3.0f)
+        else if (distance <= range)
         {
             AIState = state.attack;
         }
 
         if (AIState == state.idle)
         {
-            
+            if (patrolling)
+            {
+                patrolling = false;
+                StartCoroutine(patrol());
+            } 
         }
 
         else if (AIState == state.look)
@@ -76,27 +91,38 @@ public class AIScript : MonoBehaviour
 
         else if (AIState == state.attack)
         {
-            if (canAttack)
+            if (canAttack && combat.HP > 0)
             {
                 canAttack = false;
                 StartCoroutine(attack());
             }
-            
         }
-
-
-
     }
 
+    private Vector3 RandomVector(float min, float max)
+    {
+        var x = Random.Range(min, max);
+        var y = 0;
+        var z = Random.Range(min, max);
+        return new Vector3(x, y, z);
+    }
     IEnumerator attack()
     {
         Vector3 toOther = player.transform.position - transform.position;
         if (combat.iFrame == false)
         {
-            body.AddForce(toOther.normalized * -5.0f, ForceMode.Impulse);
+            body.AddForce(toOther.normalized * -2.0f, ForceMode.Impulse);
             combat.HP = combat.HP - 1;
         }
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         canAttack = true;
+    }
+
+    IEnumerator patrol()
+    {
+        body.velocity = RandomVector(-5f, 5f);
+        yield return new WaitForSeconds(2.5f);
+        patrolling = true;
+        yield return null;
     }
 }
