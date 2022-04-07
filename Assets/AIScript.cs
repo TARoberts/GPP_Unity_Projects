@@ -43,7 +43,7 @@ public class AIScript : MonoBehaviour
             AIState = state.look;
         }
 
-        else if (distance > 3.0f && distance <= 15f)
+        else if (distance > range && distance <= 15f)
         {
             AIState = state.chase;
         }
